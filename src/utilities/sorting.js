@@ -6,6 +6,7 @@ export const movieSortingABC = (array) => {
     if (a.movie.title > b.movie.title) {
       return 1;
     }
+    return 0;
   });
   return outputList;
 };

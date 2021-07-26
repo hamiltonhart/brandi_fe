@@ -5,12 +5,11 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { ApolloProvider, useQuery } from "@apollo/react-hooks";
+import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient, { gql } from "apollo-boost";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { PrimaryLayout } from "./components/Global";
-import { Login } from "./components/auth/Login";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -53,8 +52,7 @@ export const IS_LOGGED_IN = gql`
 `;
 
 const InitialLogin = () => {
-  const { data } = useQuery(IS_LOGGED_IN);
-  return <>{data && data.isLoggedIn ? <App /> : <Login />}</>;
+  return <App />;
 };
 
 ReactDOM.render(

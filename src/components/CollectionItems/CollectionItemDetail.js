@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { GET_COLLECTION_ITEM } from "../../gql/CollectionItemGQL";
-import { DeleteCollectionItem } from "./DeleteCollectionItem";
-import { CollectionContext } from "../../pages/CollectionPage";
 
 import { CardMoviePoster } from "../styles/CardMoviePoster";
 import {
@@ -26,23 +24,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { Error, Loading } from "../Global";
 import { CollectionItemComments } from "./CollectionItemComments";
 
-import { useToggle } from "../utilities/useToggle";
-import { AnimatePresence } from "framer-motion";
-import { CollectionItemUpdateView } from "./CollectionItemUpdateView";
-
-export const CollectionItemDetail = ({
-  itemId,
-  toggleDetail,
-  rerenderList,
-}) => {
-  const context = useContext(CollectionContext);
+export const CollectionItemDetail = ({ itemId, toggleDetail }) => {
   const POSTER_PATH = "http://image.tmdb.org/t/p/w154";
   const TMDB_PATH = "https://www.themoviedb.org/movie/";
-
-  const {
-    toggle: toggleAddComments,
-    isShowing: isShowingAddComments,
-  } = useToggle();
 
   const { data, loading, error } = useQuery(GET_COLLECTION_ITEM, {
     variables: { id: itemId },
@@ -111,38 +95,23 @@ export const CollectionItemDetail = ({
                 <CollectionItemComments
                   collectionItemId={data.collectionItem.id}
                   comments={data.collectionItem.comments}
-                  toggleAddComments={toggleAddComments}
-                  isShowingAddComments={isShowingAddComments}
                 />
               </FlexContainer>
-              <AnimatePresence>
-                {!isShowingAddComments && (
-                  <CardButtonBottomStyle
-                    variants={variants}
-                    initial="closed"
-                    animate="open"
-                    exit="closed"
-                  >
-                    <DeleteCollectionItem
-                      id={data.collectionItem.id}
-                      collectionId={context.collection.id}
-                      rerenderList={rerenderList}
-                      toggleDetail={toggleDetail}
-                    />
-                    <NoBorderButton
-                      as="a"
-                      href={`${TMDB_PATH}${data.collectionItem.movie.tmdbId}`}
-                      target="_blank"
-                    >
-                      TMDb
-                    </NoBorderButton>
-                    <CollectionItemUpdateView
-                      collectionItemId={data.collectionItem.id}
-                      toggleDetail={toggleDetail}
-                    />
-                  </CardButtonBottomStyle>
-                )}
-              </AnimatePresence>
+
+              <CardButtonBottomStyle
+                variants={variants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+              >
+                <NoBorderButton
+                  as="a"
+                  href={`${TMDB_PATH}${data.collectionItem.movie.tmdbId}`}
+                  target="_blank"
+                >
+                  TMDb
+                </NoBorderButton>
+              </CardButtonBottomStyle>
             </CardMoreInfoContainerStyle>
           </>
         )}

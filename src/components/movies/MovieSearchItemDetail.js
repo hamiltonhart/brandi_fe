@@ -19,7 +19,6 @@ import { CardStyle, CardMoreInfoContainerStyle } from "../styles/Containers";
 
 import { Modal } from "../Global/Modal";
 import { CloseButton } from "../Global/CloseButton";
-import { CreateCollectionItem } from "../CollectionItems";
 import { NoBorderButton } from "../styles/Buttons";
 
 export const MovieSearchItemDetail = ({
@@ -56,15 +55,6 @@ export const MovieSearchItemDetail = ({
 
           <CardMoreInfoContainerStyle>
             <FlexContainer flexDirection="column" marginBottom>
-              <CreateCollectionItem
-                movieCollectionId={collectionId}
-                title={title}
-                tmdbId={tmdbId}
-                summary={summary}
-                picPath={picPath}
-                releaseYear={releaseYear}
-                toggle={toggle}
-              />
               <CardSectionHeadingStyle>Summary</CardSectionHeadingStyle>
               <CardMovieSummaryStyle>{summary}</CardMovieSummaryStyle>
             </FlexContainer>

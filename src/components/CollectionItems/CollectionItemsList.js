@@ -25,7 +25,7 @@ export const CollectionItemsList = () => {
   const handleSearch = (e) => {
     const searchArray = [];
     const tempSearchTerm = e.target.value;
-    context.collectionItems.map((item) => {
+    context.collectionItems.forEach((item) => {
       const compTitle = item.movie.titlePrefix
         ? `${item.movie.titlePrefix} ${item.movie.title}`
         : item.movie.title;

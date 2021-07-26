@@ -1,6 +1,6 @@
 export const findMatch = ({ items, title, releaseYear }) => {
   let matchFound;
-  items.map((collectionItem) => {
+  items.forEach((collectionItem) => {
     const contextTitle = collectionItem.movie.titlePrefix
       ? `${collectionItem.movie.titlePrefix} ${collectionItem.movie.title}`
       : `${collectionItem.movie.title}`;
@@ -9,7 +9,6 @@ export const findMatch = ({ items, title, releaseYear }) => {
       collectionItem.movie.releaseYear === Number(releaseYear)
     ) {
       matchFound = collectionItem.id;
-      return;
     }
   });
   return matchFound;

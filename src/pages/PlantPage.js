@@ -4,8 +4,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_PLANT } from "../gql";
 
 import { Loading, Error } from "../components/Global";
-import { useToggle } from "../components/utilities";
-import { NoBorderButton, PrimaryButton } from "../components/styles/Buttons";
+
 import {
   PageHeadingStyle,
   SectionHeadingStyle,
@@ -14,17 +13,11 @@ import {
 } from "../components/styles/Typography";
 import { FlexContainer } from "../components/styles/Containers";
 
-import { NewPlantItemForm } from "../components/plants/NewPlantItemForm";
-import { UpdatePlantForm } from "../components/plants/UpdatePlantForm";
-
 export const PlantPage = () => {
   const params = useParams();
   const { data, loading, error } = useQuery(GET_PLANT, {
     variables: { id: params.plantId },
   });
-
-  const { isShowing: isShowingAdd, toggle: toggleAdd } = useToggle();
-  const { isShowing: isShowingEdit, toggle: toggleEdit } = useToggle();
 
   return (
     <FlexContainer flexDirection="column">
@@ -82,37 +75,6 @@ export const PlantPage = () => {
                 <SimplePStyle>Nothing yet...</SimplePStyle>
               )}
             </section>
-            <FlexContainer
-              className="buttons-heading"
-              marginTop
-              flexDirection="column"
-            >
-              <PrimaryButton
-                onClick={toggleAdd}
-                margin="0 0 var(--medSpacing) 0"
-              >
-                {`Add a ${data.plant.name}`}
-              </PrimaryButton>
-              <NoBorderButton
-                onClick={toggleEdit}
-              >{`Edit ${data.plant.name}`}</NoBorderButton>
-              {isShowingAdd && (
-                <NewPlantItemForm
-                  id={data.plant.id}
-                  plantName={data.plant.name}
-                  closePlantForm={toggleAdd}
-                />
-              )}
-              {isShowingEdit && (
-                <UpdatePlantForm
-                  id={data.plant.id}
-                  plantName={data.plant.name}
-                  plantTypes={data.plant.types}
-                  plants={data.plant.plants}
-                  closePlantForm={toggleEdit}
-                />
-              )}
-            </FlexContainer>
           </FlexContainer>
         </>
       )}

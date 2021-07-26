@@ -20,7 +20,12 @@ export const PlantPage = () => {
   });
 
   return (
-    <FlexContainer flexDirection="column">
+    <FlexContainer
+      flexDirection="column"
+      alignItems="center"
+      maxWidth="1000px"
+      minWidth="65%"
+    >
       {loading && <Loading />}
       {error && <Error message={error.message} />}
       {data && (

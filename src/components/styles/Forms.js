@@ -19,6 +19,7 @@ export const TextInputStyle = styled.input`
   border: 2px solid var(--lightGray);
   border-radius: var(--cardBorderRadius);
   width: ${(props) => (props.width ? props.width : `100%`)};
+  max-width: ${(props) => (props.maxWidth ? props.maxWidth : `inherit`)};
   padding: 1.6rem 1.6rem;
   background-color: var(--lightGrey);
   font-size: var(--normal);

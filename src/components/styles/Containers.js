@@ -9,6 +9,11 @@ export const FlexContainer = styled(motion.div)`
   justify-content: ${(props) =>
     props.justifyContent ? props.justifyContent : "center"};
   padding: ${(props) => (props.padding ? props.padding : `var(--smSpacing)`)};
+  margin: ${(props) => (props.margin ? props.margin : "0")};
+  ${(props) => props.minWidth && `min-width: ${props.minWidth};`}
+  ${(props) => props.width && `width: ${props.width};`}
+  ${(props) => props.maxWidth && `max-width: ${props.maxWidth};`}
+  ${(props) => props.alignItems && `align-items: ${props.alignItems};`}
   ${(props) => props.topBorder && `border-top: 2px solid var(--gray);`}
   ${(props) => props.bottomBorder && `border-bottom: 2px solid var(--gray);`}
   ${(props) =>
@@ -18,7 +23,12 @@ export const FlexContainer = styled(motion.div)`
   ${(props) => props.overflow && `overflow: ${props.overflow}`};
   ${(props) => props.marginBottom && `margin-bottom: var(--lgSpacing);`}
   ${(props) => props.marginTop && `margin-top: var(--lgSpacing);`}
-  margin: ${(props) => (props.margin ? props.margin : "0")};
+
+  > * {
+    ${(props) =>
+      props.childrenSpacing &&
+      `margin-top: var(--lgSpacing); margin-bottom: var(--lgSpacing);`}
+  }
 
   ol li {
     list-style-type: decimal;
@@ -38,6 +48,10 @@ export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--lgSpacing);
+  @media screen and (min-width: 1000px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: var(--xxlSpacing);
+  }
 `;
 
 export const MoviePosterContainer = styled(motion.article)`

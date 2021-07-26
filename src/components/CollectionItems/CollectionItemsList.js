@@ -41,7 +41,11 @@ export const CollectionItemsList = () => {
   };
 
   return (
-    <div>
+    <FlexContainer
+      flexDirection="column"
+      alignItems="center"
+      childrenSpacing="var(--lgSpacing)"
+    >
       <LabelStyle htmlFor="movieListSearchTitle" hidden>
         Movie Title
       </LabelStyle>
@@ -51,6 +55,7 @@ export const CollectionItemsList = () => {
         value={searchTerm}
         onChange={(e) => handleSearch(e)}
         placeholder="Search List"
+        maxWidth="1000px"
       />
       <FlexContainer style={{ marginTop: "var(--lgSpacing)" }}>
         <GridContainer>
@@ -63,6 +68,6 @@ export const CollectionItemsList = () => {
           ))}
         </GridContainer>
       </FlexContainer>
-    </div>
+    </FlexContainer>
   );
 };
